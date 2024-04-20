@@ -21,7 +21,7 @@ label = QLabel('Image')
 btn_folder = QPushButton('Folder')
 btn_gray = QPushButton('Gray')
 btn_left = QPushButton('Turn Left')
-btn_right = QPushButton('Turn Right(DOESENT WORK)')
+btn_right = QPushButton('Turn Right')
 btn_mirror = QPushButton('Mirror(DOESENT WORK)')
 btn_sharpness = QPushButton('Sharpness(DOESENT WORK)')
 list_pic = QListWidget()
@@ -86,6 +86,12 @@ class ImageProcessor():
         image_path = os.path.join(directory, self.save.dir, self.filename)
         self.showImage(image_path)
 
+    def do_right(self):
+        self.image = self.image.transpose(Image.ROTATE_90)
+        self.saveImage()
+        image_path = os.path.join(directory, self.save.dir, self.filename)
+        self.showImage(image_path)
+
 workdir = ImageProcessor()
 
 def showChosenImage():
@@ -122,6 +128,6 @@ btn_gray.clicked.connect(workdir.do_bw)
 # btn_mirror.clicked.connect(workdir.do_mirror)
 # btn_sharpness.clicked.connect(workdir.do_sharpness)
 btn_left.clicked.connect(workdir.do_left)
-# btn_right.clicked.connect(workdir.do_right)
+btn_right.clicked.connect(workdir.do_right)
 
 app.exec_()
